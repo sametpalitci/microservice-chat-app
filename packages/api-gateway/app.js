@@ -14,4 +14,4 @@ app.use('/api/v1/api-gateway', mainRoutes);
 
 app.listen(process.env.API_GATEWAY_PORT, () => {
     console.log(process.env.API_GATEWAY_PORT + " listening ");
-})
+});
