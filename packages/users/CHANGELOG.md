@@ -5,12 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.0.2](https://github.com/sametpalitci/microservice-chat-app/compare/v1.0.1...v1.0.2) (2021-05-13)
 
-**Note:** Version bump only for package api-gateway
-
-
-
-
-
-## 1.0.1 (2021-05-13)
-
-**Note:** Version bump only for package api-gateway
+**Note:** Version bump only for package users
