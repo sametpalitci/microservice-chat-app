@@ -21,6 +21,6 @@ db.sequelize.sync().then(() => {
         console.log(`App is listening PORT: ${process.env.API_USERS_PORT}`);
     })
 }).catch((err) => {
-    return res.status(403).json({notice: "An Error!", status: 'NO'})
+    return res.status(403).json({notice: err.message, status: 'NO'})
 })
 

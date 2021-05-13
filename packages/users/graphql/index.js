@@ -17,7 +17,7 @@ const mutation = new GraphQLObjectType({
     description:"Default Mutation",
     fields:{
         login:userMutation.login(),
-        register:userMutation.register()
+        register:userMutation.register(),
     }
 });
 
