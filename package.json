@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "devDependencies": {
+    "dotenv": "^9.0.2",
+    "lerna": "^4.0.0",
+    "pm2": "^4.5.6"
+  },
+  "name": "microservice-chat-app",
+  "scripts": {
+    "start": "lerna run start",
+    "msstart": "pm2 start ecosystem.config.js",
+    "new-version": "lerna version --conventional-commits",
+    "diff": "lerna diff",
+    "pm2-watch": "pm2 start ecosystem.config.js --watch",
+    "pm2": "pm2 start ecosystem.config.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}

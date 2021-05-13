@@ -1,0 +1,15 @@
+0 silly argv {
+0 silly argv   _: [ 'publish' ],
+0 silly argv   composed: 'publish',
+0 silly argv   lernaVersion: '4.0.0',
+0 silly argv   '$0': 'node_modules/.bin/lerna',
+0 silly argv   bump: 'from-git'
+0 silly argv }
+1 notice cli v4.0.0
+2 verbose rootPath /home/samet/personal/opensource/microservice-chat-app
+3 verbose session 96b74dcc69618f95
+4 verbose user-agent lerna/4.0.0/node@v16.1.0+x64 (linux)
+5 error Error: Command failed with exit code 128: git describe --always --long --dirty --first-parent
+5 error fatal: bad revision 'HEAD'
+5 error     at makeError (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/lib/error.js:59:11)
+5 error     at handlePromise (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/index.js:114:26)
