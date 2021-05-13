@@ -1,9 +1,10 @@
+const {API_USERS_PORT, API_URL} = process.env;
 module.exports = {
-    "services":{
-        "chat":{
-            "apiName":"chat",
-            "port":3002
+    "services": {
+        "users": {
+            "apiName": "users",
+            "port": API_USERS_PORT
         }
     },
-    'host':"http://localhost"
+    'host': API_URL
 }
