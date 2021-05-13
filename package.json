@@ -9,7 +9,7 @@
   "scripts": {
     "start": "lerna run start",
     "msstart": "pm2 start ecosystem.config.js",
-    "new-version": "lerna version --conventional-commits",
+    "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
     "pm2-watch": "pm2 start ecosystem.config.js --watch",
     "pm2": "pm2 start ecosystem.config.js"
