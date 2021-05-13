@@ -1,15 +1,88 @@
 0 silly argv {
-0 silly argv   _: [ 'publish' ],
-0 silly argv   composed: 'publish',
+0 silly argv   _: [ 'version' ],
+0 silly argv   'conventional-commits': true,
+0 silly argv   conventionalCommits: true,
+0 silly argv   yes: true,
+0 silly argv   y: true,
 0 silly argv   lernaVersion: '4.0.0',
-0 silly argv   '$0': 'node_modules/.bin/lerna',
-0 silly argv   bump: 'from-git'
+0 silly argv   '$0': 'node_modules/.bin/lerna'
 0 silly argv }
 1 notice cli v4.0.0
 2 verbose rootPath /home/samet/personal/opensource/microservice-chat-app
-3 verbose session 96b74dcc69618f95
-4 verbose user-agent lerna/4.0.0/node@v16.1.0+x64 (linux)
-5 error Error: Command failed with exit code 128: git describe --always --long --dirty --first-parent
-5 error fatal: bad revision 'HEAD'
-5 error     at makeError (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/lib/error.js:59:11)
-5 error     at handlePromise (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/index.js:114:26)
+3 info current version 1.0.4
+4 silly isAnythingCommitted
+5 verbose isAnythingCommitted 1
+6 silly getCurrentBranch
+7 verbose currentBranch main
+8 silly remoteBranchExists
+9 silly isBehindUpstream
+10 silly isBehindUpstream main is behind origin/main by 0 commit(s) and ahead by 4
+11 silly hasTags
+12 verbose hasTags true
+13 silly git-describe.sync "v1.0.3-2-g960a9f2" => {"lastTagName":"v1.0.3","lastVersion":"v1.0.3","refCount":"2","sha":"960a9f2","isDirty":false}
+14 info Looking for changed packages since v1.0.3
+15 silly checking diff packages/api-gateway
+16 silly found diff in packages/api-gateway/app.js
+17 verbose filtered diff [ 'packages/api-gateway/app.js' ]
+18 silly checking diff packages/chat-group
+19 silly no diff found in chat-group
+20 silly checking diff packages/users
+21 silly no diff found in users
+22 silly checking diff packages/web-client
+23 silly no diff found in web-client
+24 verbose updated api-gateway
+25 verbose git-describe undefined => "v1.0.3-2-g960a9f2"
+26 silly git-describe parsed => {"lastTagName":"v1.0.3","lastVersion":"v1.0.3","refCount":"2","sha":"960a9f2","isDirty":false}
+27 verbose version Overriding version of api-gateway from 1.0.3 to 1.0.4
+28 silly fixed for api-gateway at /home/samet/personal/opensource/microservice-chat-app/packages/api-gateway
+29 verbose getChangelogConfig using preset "conventional-changelog-angular"
+30 silly npa Result {
+30 silly npa   type: 'tag',
+30 silly npa   registry: true,
+30 silly npa   where: undefined,
+30 silly npa   raw: 'conventional-changelog-angular',
+30 silly npa   name: 'conventional-changelog-angular',
+30 silly npa   escapedName: 'conventional-changelog-angular',
+30 silly npa   scope: undefined,
+30 silly npa   rawSpec: '',
+30 silly npa   saveSpec: null,
+30 silly npa   fetchSpec: 'latest',
+30 silly npa   gitRange: undefined,
+30 silly npa   gitCommittish: undefined,
+30 silly npa   hosted: undefined
+30 silly npa }
+31 verbose getChangelogConfig Attempting to resolve preset "conventional-changelog-angular"
+32 info getChangelogConfig Successfully resolved preset "conventional-changelog-angular"
+33 verbose fixed increment 1.0.4 by patch
+34 info auto-confirmed
+35 info execute Skipping releases
+36 silly lifecycle No script for "preversion" in "microservice-chat-app", continuing
+37 silly lifecycle No script for "preversion" in "api-gateway", continuing
+38 silly lifecycle No script for "version" in "api-gateway", continuing
+39 silly fixed for api-gateway at /home/samet/personal/opensource/microservice-chat-app/packages/api-gateway
+40 silly fixed writing new entry: "## [1.0.5](https://github.com/sametpalitci/microservice-chat-app/compare/v1.0.3...v1.0.5) (2021-05-13)\n\n**Note:** Version bump only for package api-gateway\n\n\n\n"
+41 verbose fixed wrote /home/samet/personal/opensource/microservice-chat-app/packages/api-gateway/CHANGELOG.md
+42 silly root for microservice-chat-app at /home/samet/personal/opensource/microservice-chat-app
+43 silly root writing new entry: "## [1.0.5](https://github.com/sametpalitci/microservice-chat-app/compare/v1.0.3...v1.0.5) (2021-05-13)\n\n**Note:** Version bump only for package microservice-chat-app\n\n\n\n"
+44 verbose root wrote /home/samet/personal/opensource/microservice-chat-app/CHANGELOG.md
+45 silly lifecycle No script for "version" in "microservice-chat-app", continuing
+46 silly gitAdd [
+46 silly gitAdd   'packages/api-gateway/package.json',
+46 silly gitAdd   'packages/api-gateway/package-lock.json',
+46 silly gitAdd   'packages/api-gateway/CHANGELOG.md',
+46 silly gitAdd   'CHANGELOG.md',
+46 silly gitAdd   'lerna.json'
+46 silly gitAdd ]
+47 silly gitCommit v1.0.5
+48 verbose git [ 'commit', '-m', 'v1.0.5' ]
+49 silly gitTag v1.0.5
+50 verbose git [ 'tag', 'v1.0.5', '-m', 'v1.0.5' ]
+51 silly lifecycle No script for "postversion" in "api-gateway", continuing
+52 silly lifecycle No script for "postversion" in "microservice-chat-app", continuing
+53 info git Pushing tags...
+54 silly gitPush origin main
+55 error Error: Command failed with exit code 128: git push --follow-tags --no-verify --atomic origin main
+55 error remote: Invalid username or password.
+55 error fatal: Authentication failed for 'https://github.com/sametpalitci/microservice-chat-app.git/'
+55 error     at makeError (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/lib/error.js:59:11)
+55 error     at handlePromise (/home/samet/personal/opensource/microservice-chat-app/node_modules/execa/index.js:114:26)
