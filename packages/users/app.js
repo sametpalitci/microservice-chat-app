@@ -7,6 +7,7 @@ const {graphqlHTTP} = require('express-graphql');
 const db = require('./models');
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 const rootSchema = require('./graphql');

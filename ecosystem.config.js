@@ -17,6 +17,12 @@ module.exports = {
             cwd: "./packages/chat-group",
             script: "npm",
             args: "start"
+        },
+        {
+            name: "API Chat",
+            cwd: "./packages/chat",
+            script: "npm",
+            args: "start"
         }
     ],
 

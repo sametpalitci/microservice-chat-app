@@ -4,20 +4,22 @@ const axios = require('axios');
 
 const registry = require('../registry');
 
-router.all('/:apiName/:path',(req,res)=>{
+router.all('/:apiName/:path', async (req, res) => {
     try {
-        axios({
-            method:req.method,
-            headers:req.headers,
-            body:req.body,
-            url:registry.host+":"+registry.services[req.params.apiName].port +"/"+ req.params.path
-        }).then((response)=>{
-            res.json(response.data);
+        return await axios({
+            method: req.method,
+            headers: req.headers,
+            data: req.body,
+            params: req.query,
+            url: registry.host + ":" + registry.services[req.params.apiName].port + "/" + req.params.path
+        }).then((response) => {
+            return res.json(response.data);
+        }).catch((e) => {
+            return res.status(e.response.status).json(e.response.data);
         });
-    } catch (err){
-        return res.status(403).json({notice:"API Name doesn't exist",status:'NO'})
+    } catch (err) {
+        return res.status(403).json({notice: "API Name doesn't exist", status: 'NO'})
     }
 
 });
-
 module.exports = router;

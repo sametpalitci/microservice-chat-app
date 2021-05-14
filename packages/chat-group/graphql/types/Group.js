@@ -6,6 +6,9 @@ const GroupType = new GraphQLObjectType({
     fields: {
         name: {
             type: GraphQLString
+        },
+        id: {
+            type: GraphQLID
         }
     }
 });
@@ -26,6 +29,9 @@ const allGroup = new GraphQLObjectType({
     fields: {
         name: {
             type: GraphQLString
+        },
+        id: {
+            type: GraphQLID
         }
     }
 });

@@ -11,6 +11,7 @@
     "msstart": "pm2 start ecosystem.config.js",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
+    "saveNodeModules": "lerna bootstrap --hoist",
     "pm2-watch": "pm2 start ecosystem.config.js --watch",
     "pm2": "pm2 start ecosystem.config.js"
   },

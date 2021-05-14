@@ -4,3 +4,5 @@ node_modules/
 
 packages/users/config/config.json
 packages/chat-group/config/config.json
+
+packages/web-client/src/app/config/index.js

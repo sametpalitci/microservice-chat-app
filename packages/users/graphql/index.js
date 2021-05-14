@@ -7,7 +7,9 @@ const rootQuery = new GraphQLObjectType({
     fields:{
         hello:{
             type:GraphQLString,
-            resolve:()=> "world"
+            resolve:()=> {
+                return "world"
+            }
         }
     }
 });

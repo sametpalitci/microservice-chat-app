@@ -10,11 +10,12 @@ const GraphQLRootSchema = require('./graphql');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 app.use('/graphql', graphqlHTTP((request) => ({
     schema: GraphQLRootSchema,
-    graphiql: process.env.NODE_ENV === 'development',
+    graphiql: true,
     context: {request}
 })))
 

@@ -56,10 +56,11 @@ const allGroup = async (args, context) => {
     try {
         return await db.grouplogs.findAll({
             attributes: [
-                'group.name'
+                'group.name',
+                'group.id'
             ], include: db.groups, raw: true,
             where:[{
-                status:false
+                status:true
             }]
         });
     } catch (err) {
