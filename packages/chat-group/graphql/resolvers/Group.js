@@ -59,8 +59,8 @@ const allGroup = async (args, context) => {
                 'group.name',
                 'group.id'
             ], include: db.groups, raw: true,
-            where:[{
-                status:true
+            where: [{
+                status: true
             }]
         });
     } catch (err) {
@@ -68,4 +68,27 @@ const allGroup = async (args, context) => {
     }
 }
 
-module.exports = {add, join, leave, allGroup};
+const getExploreGroup = async (args, context) => {
+    try {
+        const verifyToken = jwt.verify(context.request.headers.authorization, process.env.SECRET_KEY);
+        const Grouplogs = await db.grouplogs.findAll({
+            where: [{
+                userId: verifyToken.id
+            }],
+            raw: true
+        });
+        const allGroupsFetch = await db.groups.findAll({
+            raw: true
+        });
+        const filterGroups = allGroupsFetch.filter((group)=>{
+            return Grouplogs.every(log => {
+                return log.groupId != group.id
+            });
+        })
+        return filterGroups;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
+
+module.exports = {add, join, leave, allGroup, getExploreGroup};

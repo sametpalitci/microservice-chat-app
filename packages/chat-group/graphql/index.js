@@ -6,7 +6,8 @@ const rootQuery = new GraphQLObjectType({
     name:'RootQuery',
     description:'Default Root Query',
     fields:{
-        getGroup:groupQuery.getGroup()
+        getGroup:groupQuery.getGroup(),
+        getExploreGroup:groupQuery.getExploreGroup()
     }
 });
 

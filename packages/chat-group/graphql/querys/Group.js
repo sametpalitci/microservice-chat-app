@@ -12,4 +12,13 @@ const getGroup = () => {
     }
 };
 
-module.exports = {getGroup}
+const getExploreGroup = () => {
+    return {
+        type: new GraphQLList(allGroup),
+        resolve: (_, args, context) => {
+            return verifyJWT(context, () => GroupResolver.getExploreGroup(args, context));
+        }
+    }
+};
+
+module.exports = {getGroup, getExploreGroup}

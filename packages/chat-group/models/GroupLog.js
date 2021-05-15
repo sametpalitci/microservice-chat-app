@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
             require: true
         }
     });
-    GroupLogs.associate = (models)=>{
-        GroupLogs.belongsTo(models.groups, { foreignKey: 'groupId'});
+    GroupLogs.associate = (models) => {
+        GroupLogs.belongsTo(models.groups, {foreignKey: 'groupId'});
     }
 
     return GroupLogs;

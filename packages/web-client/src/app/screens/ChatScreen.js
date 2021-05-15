@@ -18,10 +18,12 @@ const ChatScreen = () => {
     const [clearToken, setClearToken] = useState(false);
     const [chatData, setChatData] = useState([]);
     const [getUserName, setUserName] = useState("");
+    const [getUserId, setUserId] = useState(0);
     const [getAllGroups, setAllGroups] = useState([]);
     const [getRoom, setRoom] = useState("1");
     const [getShowGroup, setShowGroup] = useState(false);
     const [getShowExploreGroup, setShowExploreGroup] = useState(false);
+    const [getExploreGroup, setExploreGroup] = useState([]);
     const [getShowGroupName, setShowGroupName] = useState("Welcome to our chat app!");
     const [getNewGroupName, setNewGroupName] = useState("");
 
@@ -29,11 +31,17 @@ const ChatScreen = () => {
         const passToAPI = await fetchDataFromAPI('/chat-group/graphql', {
             query: `{ getGroup { name, id } }`
         }, cookies.token);
-        setAllGroups(passToAPI.data.getGroup)
+        setAllGroups(passToAPI.data.getGroup);
+
+        const passToAPIExplore = await fetchDataFromAPI('/chat-group/graphql', {
+            query: `{ getExploreGroup { name, id } }`
+        }, cookies.token);
+        setExploreGroup(passToAPIExplore.data.getExploreGroup);
+
     }
     const sentMessage = (e) => {
         e.preventDefault();
-        socket.emit('sendMessage', {name: getUserName, room: getRoom, message: getMessage});
+        socket.emit('sendMessage', {name: getUserName, room: getRoom, message: getMessage, userId: getUserId});
         setMessage("");
     }
     const roomChange = async (e, id, name) => {
@@ -42,7 +50,15 @@ const ChatScreen = () => {
         await loginRoom(id);
         await setRoom(id);
         setChatData([]);
-        setShowGroupName(name)
+        setShowGroupName(name);
+
+        await loadMessages(id);
+    }
+    const loadMessages = (id) => {
+        socket.emit('loadAllMessages', {room: id});
+        socket.on('loadAllMessage', (request) => {
+            setChatData(request)
+        });
     }
     const addNewGroup = async (e) => {
         e.preventDefault();
@@ -52,12 +68,26 @@ const ChatScreen = () => {
             const createGroup = await fetchDataFromAPI('/chat-group/graphql', {
                 query: `mutation{addGroup(name:"${getNewGroupName}"){name, id}}`
             }, cookies.token);
-            const joinGroup = await fetchDataFromAPI('/chat-group/graphql', {
+            await fetchDataFromAPI('/chat-group/graphql', {
                 query: `mutation{joinGroup(groupId:${Number(createGroup.data.addGroup.id)}){groupId}}`
             }, cookies.token);
             getGroups();
             setNewGroupName("")
         }
+    }
+    const joinGroup = async (e, id, name) => {
+        e.preventDefault();
+        await fetchDataFromAPI('/chat-group/graphql', {
+            query: `mutation{joinGroup(groupId:${id}){groupId}}`
+        }, cookies.token);
+        getGroups();
+    }
+    const leaveGroup = async (e, id) => {
+        e.preventDefault();
+        const _leaveGroup = await fetchDataFromAPI('/chat-group/graphql', {
+            query: `mutation{leaveGroup(groupId:${id}){groupId}}`
+        }, cookies.token);
+        getGroups();
     }
     const leaveRoom = (room) => {
         socket.emit('leaveRoom', {room: room});
@@ -74,7 +104,8 @@ const ChatScreen = () => {
         });
     });
     return (
-        <AuthProvider clearToken={clearToken} userNameSelector={(val) => setUserName(val)}>
+        <AuthProvider clearToken={clearToken} userNameSelector={(val) => setUserName(val)}
+                      userIdSelector={(val) => setUserId(val)}>
             <div className="container mt-4">
                 <div className="row">
                     <div className="col-md-2">
@@ -82,11 +113,17 @@ const ChatScreen = () => {
                             <h2>Chat Rooms</h2>
                             {
                                 getAllGroups.map((n, key) => {
-                                    return <button key={n.id} className={"btn mb-2"}
-                                                   onClick={(e) => roomChange(e, n.id, n.name)}>{n.name}</button>
+                                    return <>
+                                        <button key={n.id} className={"btn "}
+                                                onClick={(e) => roomChange(e, n.id, n.name)}>{n.name}</button>
+                                        <button className={"p-0 m-0 btn blockquote-footer"}
+                                                onClick={(e) => leaveGroup(e, n.id, n.name)}><small
+                                            className={"p-0 m-0 text-muted"}>LEAVE GROUP</small></button>
+                                    </>
                                 })
                             }
-                            <button className={"btn btn-primary mb-2"} onClick={() => setShowGroup(!getShowGroup)}>+</button>
+                            <button className={"btn btn-primary my-2"} onClick={() => setShowGroup(!getShowGroup)}>+
+                            </button>
                             {getShowGroup &&
                             <form onSubmit={(e) => addNewGroup(e)}>
                                 <input
@@ -96,18 +133,21 @@ const ChatScreen = () => {
                                     value={getNewGroupName}
                                     onChange={(e) => setNewGroupName(e.target.value)}
                                 />
-                                <button className={"btn btn-warning w-100 mt-2"} onClick={(e) => addNewGroup(e)}>Add
+                                <button className={"btn btn-warning w-100 my-2 "} onClick={(e) => addNewGroup(e)}>Add
                                 </button>
                             </form>
                             }
-                            <button className={"btn btn-warning mb-2"} onClick={()=>setShowExploreGroup(!getShowExploreGroup)}>Explore</button>
+                            <button className={"btn btn-warning mb-2"}
+                                    onClick={() => setShowExploreGroup(!getShowExploreGroup)}>Explore
+                            </button>
+                            <p>EXPLORE</p>
                             {getShowExploreGroup &&
-                                 <>
-                                     <p>EXPLORE</p>
-                                    <button className={"btn mb-2"}>we şflaksd</button>
-                                     <p>/EXPLORE</p>
-                                 </>
+                            getExploreGroup.map((group) => {
+                                return <button className={"btn mb-2 btn-success"}
+                                               onClick={(e) => joinGroup(e, group.id, group.name)}>{group.name}</button>
+                            })
                             }
+                            <p>/EXPLORE</p>
                             <button className={"btn btn-danger mb-2 mt-2"} onClick={() => setClearToken(true)}>Sign Out
                             </button>
                         </div>
