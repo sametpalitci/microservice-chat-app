@@ -1,6 +1,6 @@
 {
   "name": "web-client",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
@@ -20,9 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test": "echo \"All tests in api-gateway\""
+    "test": "echo \"All tests in api-gateway\"",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
