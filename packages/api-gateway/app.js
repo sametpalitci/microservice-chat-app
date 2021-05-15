@@ -23,3 +23,5 @@ app.use(
 app.listen(process.env.API_GATEWAY_PORT, () => {
     console.log(process.env.API_GATEWAY_PORT + " listening ");
 });
+
+module.exports = app;

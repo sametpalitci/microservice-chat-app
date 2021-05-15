@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,9 @@
     "http-proxy-middleware": "^2.0.0"
   },
   "devDependencies": {
-    "dotenv": "^9.0.2"
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "dotenv": "^9.0.2",
+    "mocha": "^8.4.0"
   }
 }

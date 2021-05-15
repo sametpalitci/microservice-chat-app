@@ -8,6 +8,7 @@
   "name": "microservice-chat-app",
   "scripts": {
     "start": "lerna run start",
+    "test": "lerna run test",
     "msstart": "pm2 start ecosystem.config.js",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",
