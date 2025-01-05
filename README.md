@@ -69,7 +69,7 @@ Follow the steps!
 <!-- CONTACT -->
 ## Contact
 
-A.Samet Palitci - [@asametpalitci](https://twitter.com/asametpalitci) - hyorax@gmail.com
+A.Samet Palitci - [@asametpalitci](https://twitter.com/asametpalitci) - abdulsametpalitci@gmail.com
 
 Project Link: [https://github.com/sametpalitci/microservice-chat-app](https://github.com/sametpalitci/microservice-chat-app)
 
